@@ -10,12 +10,14 @@ module.exports = function(app) {
     //get voting session obj
     .get(function(req, res) {
       
-      // topicController.allTopics();
+      topicController.allTopics().then(function() {
+        console.log('bitch: ');
+      server.io.emit('onConnection', voteController);
+      res.send(voteController);
+      });
       // console.log('topicController: ', topicController);
       
       // Emits onConnection to VoteCtrl.js
-      server.io.emit('onConnection', voteController);
-      res.send(voteController);
     })
 
     //set totalVotes

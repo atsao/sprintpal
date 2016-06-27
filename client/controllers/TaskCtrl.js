@@ -25,6 +25,8 @@ angular.module('TaskCtrl', [])
   
   // Checks sockets on connection to update your view
   Main.socket.on('onConnection', function(data){
+
+    console.log('the data: ', data);
     // Updates taskList with topics
     $scope.taskList = data.topics;
     // Updates completed tasks
@@ -50,5 +52,13 @@ angular.module('TaskCtrl', [])
         console.log(err);
     });
   }();
+
+  $scope.$watch('completedTasks', function(newValue) {
+    newValue.forEach(function(topic) {
+      Task.updateTopic(topic).catch(function(error) {
+        console.error(error);
+      });
+    });
+  });
 
 });

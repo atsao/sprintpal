@@ -2,6 +2,8 @@ var topicController = require('./topicController.js');
 var voteController = require('../votes/voteController.js');
 var server = require('../server.js');
 
+var Q = require('bluebird');
+
 module.exports = function(app) {
 
   app.param('code', topicController.findTopic);
@@ -21,11 +23,11 @@ module.exports = function(app) {
       // The below doesn't invoke the database:
       // Invoke singleTopic and pass topic.
       //topicController.singleTopic(topic);
-      voteController.singleTopic(topic);
+      // voteController.singleTopic(topic);
       
       // The below involves the database:
       // Send the number of total votes to our method in voteCtrl to handle all that needs to happen
-      // topicController.newTopic(topic);
+      topicController.newTopic(topic);
       
       // Send back our whole data object
       res.send(topicController);

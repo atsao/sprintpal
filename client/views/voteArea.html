@@ -8,7 +8,7 @@
         <input type="text" ng-model="topic" class='task-form' placeholder='Task Item' /><br />
       </form>
       <!-- <p class='task-list' ng-repeat='task in taskList track by $index'>{{ task }} | {{ task.code }}</p> -->
-      <p class='task-list' ng-repeat='task in taskList track by $index'>{{ task }}</p>
+      <p class='task-list' ng-repeat='task in taskList track by $index'>{{ task.desc }}</p>
     </div>
 
     <div ng-controller='VotingController' class='chartDiv'>
@@ -24,7 +24,7 @@
     
     <div ng-controller='TaskController' class='completedTasks'>
       <!-- <p>{{ completedTasks }}</p> -->
-      <p class='completedTask-list' ng-repeat='task in completedTasks track by $index'>{{ task }}</p>
+      <p class='completedTask-list' ng-repeat='task in completedTasks track by $index'>{{ task.desc }}: {{ task.rating }}</p>
     </div>
   </div>
   </div>

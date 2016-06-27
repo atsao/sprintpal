@@ -27,6 +27,14 @@ angular.module('TaskService', [])
         url: '/api/topic',    // Goes to topicRoutes.js
         data: JSON.stringify({topic:data})
       });
+    },
+
+    updateTopic: function(topic) {
+      return $http({
+        method: 'PUT',
+        url: '/api/topic/' + topic.code,
+        data: topic
+      });
     }
     
   };

@@ -18,7 +18,7 @@ angular.module('VoteCtrl', [])
   // onTopicChange
   Main.socket.on('onTopicChange', function(data){
     // console.log('on TOPICCHANGE: ', data.topics);
-    $scope.topicItem = data.topics[data.currentTopic];
+    $scope.topicItem = data.topics[data.currentTopic].desc;
     // This line seems to be needed to make sure all clients update appropriately
     $scope.$apply();
   });
@@ -47,19 +47,19 @@ angular.module('VoteCtrl', [])
     // Sets number of votes
     $scope.voterCount = data.totalVotes;
     // Updates current chart topic
-    $scope.topicItem = data.topics[0];
+    $scope.topicItem = data.topics[0] ? data.topics[0].desc : '';
     // This line seems to be needed to make sure all clients update appropriately
     $scope.$apply();
   });
   
-  $scope.init = function(){
-    Vote.getVoters();
-  }();
+  // $scope.init = function(){
+  //   Vote.getVoters();
+  // }();
   
   // When the current topic is complete
   Main.socket.on('onTopicComplete', function(data){
     // Updates chart title
-    $scope.topicItem = data.topics[data.currentTopic];
+    $scope.topicItem = data.topics[data.currentTopic].desc;
 
     // This line seems to be needed to make sure all clients update appropriately
     $scope.$apply();

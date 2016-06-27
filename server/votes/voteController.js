@@ -1,5 +1,7 @@
 var server = require('../server.js');
 
+// var topicController = require('../topics/topicController.js');
+
 //this contains and modifies the vote session obj
 module.exports = {
   // Initializations: view, rating counts, total votes, total votes tracked, and final result
@@ -22,6 +24,8 @@ module.exports = {
   singleTopic: function(data){
     // console.log('topicController singleTopic req: ', data);
     // Pushes new topic into topics array
+    console.log('le data: ', data);
+    console.log('type: ', typeof data);
     this.topics.push(data);
     // Emits onTopicChange to TaskCtrl.js and VoteCtrl.js
     server.io.emit('onTopicChange', this);
@@ -106,9 +110,13 @@ module.exports = {
       // Removes and stores the first item in topics array
       var task = this.topics.shift();
       // Combines task with the result
-      var completedTask = task + ': ' + this.result;
-      // Adds done item to completedTopics
-      this.completedTopics.push(completedTask);
+      // var completedTask = task + ': ' + this.result;
+      // // Adds done item to completedTopics
+      // this.completedTopics.push(completedTask);
+
+      task.rating = this.result;
+      this.completedTopics.push(task);
+
     
       // Emits onTopicCompelete to TaskCtrl.js and VoteCtrl.js
       server.io.emit('onTopicComplete', this);
